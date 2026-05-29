@@ -6,7 +6,10 @@
   "content_scripts": [
     {
       "matches": ["*://pncp.gov.br/*", "*://*.pncp.gov.br/*"],
-      "js": ["scripts/content.js"],
+      "js": [
+        "libs/xlsx.full.min.js", 
+        "scripts/content.js"
+      ],
       "css": ["styles/style.css"]
     }
   ]
