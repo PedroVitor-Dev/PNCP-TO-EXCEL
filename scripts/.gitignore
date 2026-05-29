@@ -1,0 +1,17 @@
+# Chave privada da extensão (MANTENHA ISSO FORA DO GIT!)
+*.pem
+
+# Pastas e arquivos gerados pelo sistema
+.DS_Store
+Thumbs.db
+
+# Pastas de configuração do editor ou do sistema
+.vscode/
+.idea/
+
+# Pacotes compactados (não queremos versionar os .crx ou .zip aqui)
+*.crx
+*.zip
+
+# Pastas de controle de versão (já são gerenciadas pelo Git)
+.git/
