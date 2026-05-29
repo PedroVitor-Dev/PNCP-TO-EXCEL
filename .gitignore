@@ -1,0 +1,23 @@
+# Chaves privadas da extensão Chrome
+*.pem
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configurações de IDE/editor
+.vscode/
+.idea/
+
+# Builds e pacotes gerados
+*.crx
+*.zip
+
+# Dependências (caso use npm futuramente)
+node_modules/
+
+# Logs
+*.log
+
+# Variáveis de ambiente
+.env
