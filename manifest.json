@@ -8,6 +8,13 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["*://pncp.gov.br/*", "*://*.pncp.gov.br/*"],
