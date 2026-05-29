@@ -9,22 +9,38 @@ document.body.appendChild(botaoExcel);
 // 3. O que acontece quando clicamos no botão
 botaoExcel.addEventListener("click", () => {
     
-    // Passo 3.1: Criar alguns dados de teste (como se fossem extraídos do site)
-    // Cada colchete interno representa uma LINHA do Excel
-    const dados = [
-        ["Objeto da Contratação", "Valor (R$)", "Data"],
-        ["Computador de Alta Performance", "5.000,00", "29/05/2026"],
-        ["Mesa de Escritório", "850,00", "29/05/2026"],
-        ["Cadeira Ergonômica", "1.200,00", "29/05/2026"]
+    // Passo 3.1: Criar a base da nossa planilha (o cabeçalho)
+    const dadosParaExcel = [
+        ["Objeto/Título", "Órgão Responsável", "Data/Status"] 
     ];
 
-    // Passo 3.2: A biblioteca SheetJS (XLSX) transforma nossa lista em uma Planilha
-    const planilha = XLSX.utils.aoa_to_sheet(dados);
+    // Passo 3.2: O "Robô" lê a tela buscando os blocos de resultados
+    // Tenta encontrar elementos comuns de listas ou tabelas no HTML
+    const resultados = document.querySelectorAll(".br-card, .resultado-item, tr, .list-item");
 
-    // Passo 3.3: Criamos um "Livro" de Excel (Workbook) e colamos nossa planilha nele
-    const livro = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(livro, planilha, "Contratações Teste");
+    // Para cada bloco encontrado na tela, fazemos a extração
+    resultados.forEach(item => {
+        // Tenta achar o título, órgão e data usando tags comuns.
+        // O sinal '?' (Optional Chaining) evita que o programa quebre se a informação não existir naquela linha.
+        const titulo = item.querySelector("h3, h4, .titulo, .title")?.innerText || "Título não encontrado";
+        const orgao = item.querySelector("h5, .orgao, .subtitle, .description")?.innerText || "Órgão não encontrado";
+        const data = item.querySelector(".data, .status, .date, .badge")?.innerText || "Data não encontrada";
+        
+        // Adicionamos a linha extraída aos nossos dados gerais
+        dadosParaExcel.push([titulo, orgao, data]);
+    });
 
-    // Passo 3.4: Forçamos o navegador a baixar o arquivo .xlsx final
-    XLSX.writeFile(livro, "PNCP_Extracao_Teste.xlsx");
+    // Se o robô só tiver a linha 1 (o cabeçalho), ele não achou nada na tela
+    if (dadosParaExcel.length === 1) {
+        alert("O robô não encontrou os dados automaticamente. Precisaremos mapear as 'classes' HTML exatas da página do PNCP!");
+    } else {
+        // Passo 3.3: Transformar tudo em planilha
+        const planilha = XLSX.utils.aoa_to_sheet(dadosParaExcel);
+        const livro = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(livro, planilha, "Dados PNCP");
+        
+        // Passo 3.4: Baixar o arquivo final
+        XLSX.writeFile(livro, "PNCP_Dados_Reais.xlsx");
+        alert("Planilha gerada com sucesso com " + (dadosParaExcel.length - 1) + " itens lidos da tela!");
+    }
 });
