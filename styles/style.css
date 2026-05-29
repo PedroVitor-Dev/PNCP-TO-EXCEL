@@ -1,0 +1,23 @@
+/* Botão flutuante fixado no canto inferior direito */
+#btn-pncp-excel {
+    position: fixed; /* Fixa o elemento na tela, mesmo se rolar a página */
+    bottom: 20px;    /* Distância do fundo da tela */
+    right: 20px;     /* Distância da lateral direita da tela */
+    z-index: 999999; /* Garante que o botão fique na frente de qualquer outro elemento do site */
+    
+    background-color: #107c41; /* Verde clássico do Excel */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer; /* Muda o mouse para a "mãozinha" de clique */
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.3); /* Sombra para dar destaque */
+    transition: background-color 0.3s; /* Animação suave de cor */
+}
+
+/* Efeito ao passar o mouse por cima do botão */
+#btn-pncp-excel:hover {
+    background-color: #0b5e31; /* Verde mais escuro no hover */
+}
