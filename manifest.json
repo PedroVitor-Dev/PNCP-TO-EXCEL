@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "PNCP-TO-EXCEL",
+  "version": "1.0",
+  "description": "Extrai dados do PNCP e converte para planilha do Excel.",
+  "content_scripts": [
+    {
+      "matches": ["*://pncp.gov.br/*", "*://*.pncp.gov.br/*"],
+      "js": ["scripts/content.js"],
+      "css": ["styles/style.css"]
+    }
+  ]
+}
